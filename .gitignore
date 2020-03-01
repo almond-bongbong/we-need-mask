@@ -1,0 +1,8 @@
+node_modules
+package-lock.json
+env.js
+build
+.idea
+ecosystem.config.js
+.env
+dist.zip

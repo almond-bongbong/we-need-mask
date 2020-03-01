@@ -1,0 +1,33 @@
+{
+  "name": "we-need-mask",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -w",
+    "prebuild": "rm -rf build",
+    "build": "tsc",
+    "predeploy": "npm run build",
+    "deploy": "node scripts/deploy.js",
+    "server:start": "node_modules/pm2/bin/pm2 start ./index.js --name wnm",
+    "server:stop": "node_modules/pm2/bin/pm2 stop wnm",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@types/puppeteer": "^2.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node-telegram-bot-api": "^0.40.0",
+    "puppeteer": "^2.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "archiver": "^3.1.1",
+    "ssh2-promise": "^0.1.6",
+    "typescript": "^3.8.3"
+  }
+}
