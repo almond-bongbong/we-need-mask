@@ -60,4 +60,8 @@ export default [
     name: '홈트너 KF94 나노필터 초미세먼지 입체형 마스크',
     link: 'https://smartstore.naver.com/hometner/products/3893937435',
   },
+  {
+    name: '바이홈 황사 방역용 마스크 KF94 50매(5매입X10봉)',
+    link: 'https://smartstore.naver.com/mesili/products/4433127990',
+  },
 ];

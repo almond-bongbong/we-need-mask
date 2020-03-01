@@ -9,7 +9,7 @@ const naverStoreCrawler = async (chatBot: TelegramChatBot) => {
   console.info('Start naver store crawler...');
 
   const browser = await puppeteer.launch({
-    headless: true,
+    headless: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
     slowMo: 100,
   });
