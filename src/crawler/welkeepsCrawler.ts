@@ -5,6 +5,7 @@ import { delay } from '../lib/utils';
 const TARGET_URL = 'http://www.welkeepsmall.com/shop/shopbrand.html?type=X&xcode=023';
 
 const welkeepsCrawler = (browser: Browser, chatBot: TelegramChatBot) => {
+  chatBot.send('웰킵스몰 감시가 시작되었습니다.');
   console.info('Start welkeeps crawler...');
 
   const job = async () => {

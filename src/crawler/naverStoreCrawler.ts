@@ -4,7 +4,7 @@ import NAVER_STROE, { Store } from '../contstants/naver_store';
 import { delay } from '../lib/utils';
 
 const naverStoreCrawler = async (browser: Browser, chatBot: TelegramChatBot) => {
-  // chatBot.send('네이버 스토어 감시가 시작되었습니다.');
+  chatBot.send('네이버 스토어 감시가 시작되었습니다.');
   console.info('Start naver store crawler...');
 
   const job = async (store: Store) => {
