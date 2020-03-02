@@ -1,18 +1,12 @@
-import puppeteer from 'puppeteer';
+import { Browser } from 'puppeteer';
 import TelegramChatBot from '../lib/TelegramChatBot';
 import NAVER_STROE, { Store } from '../contstants/naver_store';
 
 const delay = (time: number) => new Promise((resolve) => { setTimeout(resolve, time) });
 
-const naverStoreCrawler = async (chatBot: TelegramChatBot) => {
-  chatBot.send('네이버 스토어 감시가 시작되었습니다.');
+const naverStoreCrawler = async (browser: Browser, chatBot: TelegramChatBot) => {
+  // chatBot.send('네이버 스토어 감시가 시작되었습니다.');
   console.info('Start naver store crawler...');
-
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    slowMo: 100,
-  });
 
   const job = async (store: Store) => {
     const page = await browser.newPage();
