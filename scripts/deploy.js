@@ -3,9 +3,8 @@ dotenv.config();
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
-const SSH2Promise = require('ssh2-promise');
 const distZipPath = path.join(__dirname, '../dist.zip');
-const node_ssh = require('node-ssh')
+const node_ssh = require('node-ssh');
 const ssh = new node_ssh();
 
 const output = fs.createWriteStream(distZipPath);
@@ -57,31 +56,3 @@ const sshConfig = {
     ssh.dispose();
   }
 })();
-
-// const ssh = new SSH2Promise(sshConfig);
-// const sftp = ssh.sftp();
-
-// (async function() {
-//   try {
-//     await sftp.fastPut(distZipPath, '/home/ubuntu/we-need-mask/dist.zip');
-//     console.info('File uploaded');
-//
-//     await ssh.exec('unzip -o /home/ubuntu/we-need-mask/dist.zip -d /home/ubuntu/we-need-mask/');
-//     await ssh.exec('set -i && source ~/.bashrc && npm install --prefix ~/we-need-mask');
-//     console.info('Install success');
-//     await ssh.exec('source ~/.bashrc && npm run server:reload');
-//     console.info('Start pm2');
-//
-//     await ssh.exec(`rm -rf /home/ubuntu/we-need-mask/dist.zip`);
-//     console.info(`Deploy succeeded!`);
-//   } catch (e) {
-//     console.error('Error!');
-//     console.error(bin2String(e));
-//   } finally {
-//     // await ssh.close();
-//   }
-// })();
-
-function bin2String(array) {
-  return String.fromCharCode.apply(String, array);
-}

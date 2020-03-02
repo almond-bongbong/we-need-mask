@@ -1,8 +1,7 @@
 import { Browser } from 'puppeteer';
 import TelegramChatBot from '../lib/TelegramChatBot';
 import NAVER_STROE, { Store } from '../contstants/naver_store';
-
-const delay = (time: number) => new Promise((resolve) => { setTimeout(resolve, time) });
+import { delay } from '../lib/utils';
 
 const naverStoreCrawler = async (browser: Browser, chatBot: TelegramChatBot) => {
   // chatBot.send('네이버 스토어 감시가 시작되었습니다.');
@@ -28,7 +27,7 @@ const naverStoreCrawler = async (browser: Browser, chatBot: TelegramChatBot) => 
   NAVER_STROE.forEach((store) => {
     (function recur() {
       Promise.all([
-        delay(10000),
+        delay(5000),
         job(store),
       ]).then(recur);
     })();

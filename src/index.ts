@@ -17,5 +17,5 @@ const maskRoom: TelegramChatBot = new TelegramChatBot(-1001316847681);
   });
 
   naverStoreCrawler(browser, maskRoom);
-  // welkeepsCrawler(browser, maskRoom);
+  welkeepsCrawler(browser, maskRoom);
 })();
