@@ -64,4 +64,8 @@ export default [
     name: '바이홈 황사 방역용 마스크 KF94 50매(5매입X10봉)',
     link: 'https://smartstore.naver.com/mesili/products/4433127990',
   },
+  {
+    name: '나록스 황사마스크 KF80 94 미세먼지 차단 5매',
+    link: 'https://m.smartstore.naver.com/ygfac/products/3905641271',
+  },
 ];
