@@ -22,6 +22,7 @@ archive.pipe(output);
 archive.directory('./build', 'build');
 archive.file('package.json', { name: 'package.json' });
 archive.file('ecosystem.config.js', { name: 'ecosystem.config.js' });
+archive.file('.env', { name: '.env' });
 archive.finalize();
 
 const sshConfig = {
