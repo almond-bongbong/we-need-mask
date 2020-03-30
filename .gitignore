@@ -6,3 +6,4 @@ build
 ecosystem.config.js
 .env
 dist.zip
+docker
