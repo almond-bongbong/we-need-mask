@@ -9,8 +9,7 @@
     "build": "tsc",
     "predeploy": "npm run build",
     "deploy": "node scripts/deploy.js",
-    "server:reload": "node_modules/.bin/pm2 reload ecosystem.config.js --env production",
-    "server:stop": "node_modules/.bin/pm2 stop ecosystem.config.js",
+    "server:reload": "pm2-runtime ecosystem.config.js --env production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
