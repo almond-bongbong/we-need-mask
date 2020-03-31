@@ -23,6 +23,8 @@ archive.directory('./build', 'build');
 archive.file('package.json', { name: 'package.json' });
 archive.file('ecosystem.config.js', { name: 'ecosystem.config.js' });
 archive.file('.env', { name: '.env' });
+archive.file('Dockerfile', { name: 'Dockerfile' });
+archive.file('.dockerignore', { name: '.dockerignore' });
 archive.finalize();
 
 const sshConfig = {
@@ -31,24 +33,34 @@ const sshConfig = {
   privateKey: process.env.SERVER_KEY,
 };
 
+const workdir = '/home/ubuntu/we-need-mask';
+
 (async () => {
   try {
     await ssh.connect(sshConfig);
-    await ssh.putFile(distZipPath, '/home/ubuntu/we-need-mask/dist.zip');
-    await ssh.execCommand('unzip -o /home/ubuntu/we-need-mask/dist.zip -d /home/ubuntu/we-need-mask/');
+    await ssh.putFile(distZipPath, `${workdir}/dist.zip`);
+    await ssh.execCommand(`unzip -o ${workdir}/dist.zip -d /home/ubuntu/we-need-mask/`);
     const nodeVersion = await ssh.execCommand('node --version');
     console.log('STDOUT: ' + nodeVersion.stdout);
     console.log('STDERR: ' + nodeVersion.stderr);
 
-    const installResult = await ssh.execCommand('cd /home/ubuntu/we-need-mask/ && npm install');
-    console.log('STDOUT: ' + installResult.stdout);
-    console.log('STDERR: ' + installResult.stderr);
+    // const installResult = await ssh.execCommand('cd /home/ubuntu/we-need-mask/ && npm install');
+    // console.log('STDOUT: ' + installResult.stdout);
+    // console.log('STDERR: ' + installResult.stderr);
+    //
+    // const reloadResult = await ssh.execCommand('cd /home/ubuntu/we-need-mask/ && npm run server:reload');
+    // console.log('STDOUT: ' + reloadResult.stdout);
+    // console.log('STDERR: ' + reloadResult.stderr);
 
-    const reloadResult = await ssh.execCommand('cd /home/ubuntu/we-need-mask/ && npm run server:reload');
-    console.log('STDOUT: ' + reloadResult.stdout);
-    console.log('STDERR: ' + reloadResult.stderr);
+    const dockerBuildResult = await ssh.execCommand(`docker build -t cmlee/we-need-mask ${workdir}`);
+    console.log('STDOUT: ' + dockerBuildResult.stdout);
+    console.log('STDERR: ' + dockerBuildResult.stderr);
 
-    await ssh.execCommand('rm -rf /home/ubuntu/we-need-mask/dist.zip');
+    const dockerRunResult = await ssh.execCommand('docker run -d cmlee/we-need-mask');
+    console.log('STDOUT: ' + dockerRunResult.stdout);
+    console.log('STDERR: ' + dockerRunResult.stderr);
+
+    await ssh.execCommand(`rm -rf ${workdir}/dist.zip`);
     console.info(`Deploy succeeded`);
   } catch (e) {
     console.error('Error!!');
